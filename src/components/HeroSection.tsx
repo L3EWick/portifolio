@@ -52,7 +52,7 @@ export const HeroSection: React.FC = () => {
           <div className="mb-8">
             <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 p-1 animate-pulse">
               <img
-                src="assets/ismaellima.jpeg"
+                src="/public/assets/ismaellima.jpeg"
                 alt="Ismael Lima"
                 className="w-full h-full object-cover rounded-full"
               />

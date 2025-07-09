@@ -23,7 +23,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'API e dashboard para análise de risco urbano com base em localização.',
       technologies: ['Next.js', 'Laravel', 'PHP', 'MySQL'],
       role: 'Desenvolvedor Fullstack (Next.js + Laravel)',
-      image: '/assets/img/taporperto.png',
+      image: 'public/assets/img/taporperto.png',
       link: 'https://taporperto.com.br/dashboard',
     },
     {
@@ -32,7 +32,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Calculadora de alimentos e bebidas para eventos como churrasco e festas.',
       technologies: ['Next.js'],
       role: 'Desenvolvedor Fullstack (Next.js)',
-      image: '/assets/img/dapraquantoscomer.png',
+      image: 'public/assets/img/dapraquantoscomer.png',
       link: 'https://dapraquantoscomer.web.app/',
     },
     {
@@ -41,7 +41,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Sistema de apoio para campanhas políticas com formulários e gerenciamento.',
       technologies: ['Laravel', 'Blade', 'PHP', 'MySQL'],
       role: 'Desenvolvedor Fullstack (Laravel + Blade)',
-      image: '/assets/img/minhacampanha.png',
+      image: 'public/assets/img/minhacampanha.png',
       link: 'https://minhacampanha.ultracode.com.br/',
     },
     {
@@ -50,7 +50,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Sistema de gabinete digital para vereadores com solicitações e relatórios.',
       technologies: ['Laravel', 'Blade', 'PHP', 'MySQL'],
       role: 'Desenvolvedor Fullstack (Laravel + Blade)',
-      image: '/assets/img/ultracode.png',
+      image: 'public/assets/img/ultracode.png',
       link: 'https://ultracode.com.br/',
     },
     {
@@ -59,7 +59,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Sistema de gerenciamento de campanha política para deputados com foco em engajamento e controle de equipe.',
       technologies: ['Laravel', 'Blade', 'PHP', 'MySQL'],
       role: 'Desenvolvedor Fullstack (Laravel + Blade)',
-      image: '/assets/img/ultracode.png',
+      image: 'public/assets/img/ultracode.png',
       link: 'https://ultracode.com.br/',
     },
     {
@@ -76,7 +76,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Solução completa de rastreamento veicular com áreas de risco e alertas em tempo real.',
       technologies: ['Laravel', 'PHP', 'MySQL'],
       role: 'Desenvolvedor Backend (Laravel)',
-      image: '/assets/img/rotasseguras.png',
+      image: 'public/assets/img/rotasseguras.png',
       link: 'https://www.rotasseguras.com.br/',
     },
     {
@@ -85,7 +85,7 @@ export const ProjectsSection: React.FC = () => {
       description: 'Participei de diversos outros projetos com foco em soluções práticas, escaláveis e modernas.',
       technologies: ['Flutter', 'Laravel', 'React', 'Next.js', 'MySQL'],
       role: 'Desenvolvedor Fullstack',
-      image: '/assets/ismaellima.jpeg',
+      image: 'public/assets/ismaellima.jpeg',
     },
   ];
 
