@@ -35,10 +35,12 @@ export const Navigation: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -70; // ajuste conforme a altura do header
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
     setIsMenuOpen(false);
   };
 
