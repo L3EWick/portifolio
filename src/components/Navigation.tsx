@@ -70,8 +70,8 @@ export const Navigation: React.FC = () => {
 
       {/* Mobile Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 lg:hidden">
-        <div className="bg-black/20 backdrop-blur-lg border-b border-cyan-500/30">
-          <div className="flex justify-between items-center p-4">
+        <div className="relative bg-black/20 backdrop-blur-lg border-b border-cyan-500/30 pt-4">
+          <div className="flex justify-between items-center px-4 pb-4">
             <div className="text-xl font-bold text-white">
               <span className="text-cyan-400">Ismael Lima</span>
             </div>

@@ -45,7 +45,7 @@ export const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 lg:pt-0">
       <div className="container mx-auto px-6 text-center z-10">
         <div className="max-w-4xl mx-auto">
           {/* Profile Avatar */}
