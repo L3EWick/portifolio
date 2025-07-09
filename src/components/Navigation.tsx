@@ -73,7 +73,7 @@ export const Navigation: React.FC = () => {
         <div className="bg-black/20 backdrop-blur-lg border-b border-cyan-500/30">
           <div className="flex justify-between items-center p-4">
             <div className="text-xl font-bold text-white">
-              <span className="text-cyan-400">Lee</span>
+              <span className="text-cyan-400">Ismael Lima</span>
             </div>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
