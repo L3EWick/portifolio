@@ -9,12 +9,39 @@ export const ProjectsSection: React.FC = () => {
 
   const projects: Project[] = [
     {
+      id: 'nasf',
+      title: 'NASF',
+      description: 'Sistema interno da Secretaria de Saúde para gestão das equipes do Núcleo de Apoio à Saúde da Família.',
+      technologies: ['Laravel', 'Blade', 'PHP', 'MySQL'],
+      role: 'Desenvolvedor Fullstack (Laravel + Blade)',
+      image: '/assets/img/nasf.png',
+      link: 'https://nasf.mesquita.rj.gov.br/login',
+    },
+    {
+      id: 'sirvodec',
+      title: 'SIRVODEC',
+      description: 'Sistema de rede de voluntários da Defesa Civil de Mesquita.',
+      technologies: ['Laravel', 'Blade', 'PHP', 'MySQL'],
+      role: 'Desenvolvedor Fullstack (Laravel + Blade)',
+      image: '/assets/img/sirvodec.png',
+      link: 'https://sirvodec.mesquita.rj.gov.br/login',
+    },
+    {
+      id: 'bci',
+      title: 'BCI - Cadastro Imobiliário',
+      description: 'Sistema completo de Boletim de Cadastro Imobiliário com integração web e mobile.',
+      technologies: ['Laravel', 'Blade', 'PHP', 'Flutter', 'MySQL'],
+      role: 'Desenvolvedor Fullstack (Laravel + Flutter)',
+      image: '/assets/img/bci.png',
+      link: 'https://bci.mesquita.rj.gov.br/',
+    },
+    {
       id: 'rasterapp',
       title: 'RasterApp',
       description: 'Sistema de rastreamento avançado com alertas em tempo real e visualização de frota.',
       technologies: ['React', 'Laravel', 'PHP', 'WebSocket', 'MySQL'],
       role: 'Desenvolvedor Fullstack (Frontend React + Backend Laravel)',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '/assets/img/raster.png',
       link: 'https://app.rasterapp.com.br/',
     },
     {
