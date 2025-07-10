@@ -97,7 +97,7 @@ export const AboutSection: React.FC = () => {
               <div className="bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/30">
                 <h3 className="text-2xl font-bold text-white mb-6">Minha Jornada</h3>
                 <p className="text-gray-300 leading-relaxed">
-                  Olá, sou Ismael Lima, um apaixonado por tecnologia desde a infância e atualmente com 23 anos. Como engenheiro de software, trago experiência e habilidades em Flutter, Dart, PHP, Laravel e MySQL. Trabalho com desenvolvimento fullstack em projetos de rastreamento em tempo real, soluções públicas e aplicativos móveis.
+                  Olá, sou Ismael Lima, um apaixonado por tecnologia desde a infância e atualmente com 24 anos. Como engenheiro de software, trago experiência e habilidades em Flutter, Dart, PHP, Laravel, React, Next e MySQL. Trabalho com desenvolvimento fullstack em projetos de rastreamento em tempo real, soluções públicas e aplicativos móveis.
                 </p>
                 <p className="text-gray-300 leading-relaxed mt-4">
                   Também utilizo Python em projetos de reconhecimento e automação. Estou sempre em busca de aprimoramento profissional, focado em resolver problemas reais com tecnologia prática, eficiente e acessível.
