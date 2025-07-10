@@ -8,31 +8,31 @@ export const AboutSection: React.FC = () => {
 
   const timelineData: TimelineItem[] = [
     {
-      year: '2024',
+      year: '2024 - Até o momento.',
       title: 'Fullstack Developer',
       company: 'GPS Rotas Seguras',
       description: 'Desenvolvimento fullstack com Flutter, Laravel e MySQL. Implementação de funcionalidades em tempo real e APIs de rastreamento.',
     },
     {
-      year: '2024',
+      year: '2024 - Até o momento.',
       title: 'Desenvolvedor Mobile',
       company: 'ultraCode',
       description: 'Criação de aplicativos móveis em Flutter. Foco em UX e performance em aplicações híbridas para Android e iOS.',
     },
     {
-      year: '2023',
+      year: '2023 - 2024',
       title: 'Desenvolvedor Mobile',
       company: 'Prefeitura de Mesquita',
       description: 'Desenvolvimento de soluções móveis para serviços públicos, com foco em acessibilidade e usabilidade.',
     },
     {
-      year: '2022',
+      year: '2022 - 2023',
       title: 'Desenvolvedor Web Fullstack',
       company: 'Prefeitura de Mesquita',
       description: 'Criação de sistemas internos com Laravel e PHP, integração com banco de dados MySQL e dashboards administrativos.',
     },
     {
-      year: '2021',
+      year: '2021 - 2022',
       title: 'Estagiário de Desenvolvimento Web',
       company: 'Prefeitura de Mesquita',
       description: 'Primeiro contato profissional com desenvolvimento web usando Laravel. Apoio no desenvolvimento de portais e sistemas internos.',
@@ -53,7 +53,7 @@ export const AboutSection: React.FC = () => {
               Sobre <span className="text-cyan-400">Mim</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Desenvolvedor apaixonado por tecnologia, com mais de 3 anos de experiência criando soluções inovadoras
+              Desenvolvedor apaixonado por tecnologia, com mais de 4 anos de experiência criando soluções inovadoras
             </p>
           </div>
 
