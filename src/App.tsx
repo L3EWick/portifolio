@@ -48,12 +48,12 @@ function App() {
           </div>
         </div>
       </footer>
-      /*{showGame && (
+     {/*{showGame && (
         <div className="fixed inset-0 z-50 bg-black">
           <PhpRunnerGame onClose={() => setShowGame(false)} />
         </div>
       )}
-      */
+      */}
     </div>
   );
 }
