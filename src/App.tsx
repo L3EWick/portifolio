@@ -49,9 +49,9 @@ function App() {
         </div>
       </footer>
       {showGame && (
-        <div className="fixed inset-0 z-50 bg-black">
+       /* <div className="fixed inset-0 z-50 bg-black">
           <PhpRunnerGame onClose={() => setShowGame(false)} />
-        </div>
+        </div>*/
       )}
     </div>
   );
