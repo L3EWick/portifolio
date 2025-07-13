@@ -14,32 +14,31 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
 
     const img = new Image();
     img.src = '/assets/sprites/php.png';
-    img.crossOrigin = "anonymous";
+    img.crossOrigin = 'anonymous';
 
     let x = 50;
     let y = 200;
     let velocity = 0;
     let gravity = 1;
     let isJumping = false;
-    let obstacles: { x: number; width: number; height: number }[] = [];
+    let obstacles: { x: number; width: number; height: number; passed?: boolean }[] = [];
     let score = 0;
+    const groundY = canvas.height - 100;
+    const phpWidth = 80;
+    const phpHeight = 80;
 
     const jump = () => {
       if (!isJumping) {
         isJumping = true;
-        velocity = 15;
+        velocity = 18;
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        jump();
-      }
+      if (e.code === 'Space') jump();
     };
 
-    const handleTouch = () => {
-      jump();
-    };
+    const handleTouch = () => jump();
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('touchstart', handleTouch);
@@ -48,63 +47,74 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // desenha personagem
+      // desenha personagem (elefante PHP)
       if (img.complete) {
         ctx.save();
-        ctx.translate(x + 40, y); // move a origem pro centro do personagem
+        ctx.translate(x + phpWidth, y); // move a origem pro centro
         ctx.scale(-1, 1); // inverte horizontalmente
-        ctx.drawImage(img, 0, 0, img.width, img.height, -40, 0, 40, 40);
+        ctx.drawImage(img, 0, 0, img.width, img.height, -phpWidth, 0, phpWidth, phpHeight);
         ctx.restore();
       }
 
-      // desenha obstáculos
+      // obstáculos
       ctx.fillStyle = 'red';
-      obstacles.forEach(obs => {
-        ctx.fillRect(obs.x, 200, obs.width, obs.height);
+      obstacles.forEach((obs) => {
+        ctx.fillRect(obs.x, groundY - obs.height, obs.width, obs.height);
       });
 
-      // desenha pontuação
+      // pontuação
       ctx.fillStyle = 'white';
       ctx.font = '20px monospace';
-      ctx.fillText(`Score: ${score}`, 20, 40);
+      ctx.fillText(`Pulos certos: ${score}`, 20, 40);
     };
 
     const update = () => {
       if (isJumping) {
         velocity -= gravity;
         y -= velocity;
-        if (y >= 200) {
-          y = 200;
+        if (y >= groundY - phpHeight) {
+          y = groundY - phpHeight;
           isJumping = false;
           velocity = 0;
         }
       }
 
       // move obstáculos
-      for (let i = 0; i < obstacles.length; i++) {
-        obstacles[i].x -= 5;
+      obstacles.forEach((obs) => {
+        obs.x -= 5;
 
         // colisão
-        if (
-          x + 40 > obstacles[i].x &&
-          x < obstacles[i].x + obstacles[i].width &&
-          y + 40 > 200
-        ) {
+        const collided =
+          x + phpWidth > obs.x &&
+          x < obs.x + obs.width &&
+          y + phpHeight > groundY - obs.height;
+
+        if (collided) {
           score = 0;
           obstacles = [];
-          break;
+          return;
+        }
+
+        // passou com sucesso
+        if (!obs.passed && obs.x + obs.width < x) {
+          score++;
+          obs.passed = true;
+        }
+      });
+
+      // remove obstáculos fora da tela
+      obstacles = obstacles.filter((obs) => obs.x + obs.width > 0);
+
+      // adiciona novos obstáculos com maior espaçamento
+      if (Math.random() < 0.015) {
+        const width = 40 + Math.random() * 30;
+        const height = 40 + Math.random() * 30;
+        const lastX = obstacles.length > 0 ? obstacles[obstacles.length - 1].x : 0;
+        if (canvas.width - lastX > 300) {
+          obstacles.push({ x: canvas.width + 100, width, height });
         }
       }
 
-      // remove obstáculos que saíram da tela
-      obstacles = obstacles.filter(obs => obs.x + obs.width > 0);
-
-      // adiciona novos obstáculos
-      if (Math.random() < 0.02) {
-        obstacles.push({ x: canvas.width, width: 30 + Math.random() * 20, height: 40 });
-      }
-
-      score++;
       draw();
       requestAnimationFrame(update);
     };
@@ -132,7 +142,7 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
         ref={canvasRef}
         width={window.innerWidth}
         height={window.innerHeight}
-        className="w-full h-full"
+        className="w-full h-full touch-none"
       />
     </div>
   );
