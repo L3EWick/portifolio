@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 interface PhpRunnerGameProps {
   onClose: () => void;
@@ -6,6 +6,8 @@ interface PhpRunnerGameProps {
 
 export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [gameOver, setGameOver] = useState(false);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current as HTMLCanvasElement;
@@ -17,18 +19,30 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
     img.crossOrigin = 'anonymous';
 
     let x = 50;
-    let y = 200;
+    let y = 0;
     let velocity = 0;
     let gravity = 1;
     let isJumping = false;
-    let obstacles: { x: number; width: number; height: number; passed?: boolean }[] = [];
-    let score = 0;
+    let phpWidth = 80;
+    let phpHeight = 80;
+
     const groundY = canvas.height - 100;
-    const phpWidth = 80;
-    const phpHeight = 80;
+
+    let obstacles: { x: number; width: number; height: number; passed?: boolean }[] = [];
+
+    const resetGame = () => {
+      x = 50;
+      y = groundY - phpHeight;
+      velocity = 0;
+      isJumping = false;
+      setScore(0);
+      obstacles = [];
+      setGameOver(false);
+      update();
+    };
 
     const jump = () => {
-      if (!isJumping) {
+      if (!isJumping && !gameOver) {
         isJumping = true;
         velocity = 18;
       }
@@ -37,7 +51,6 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === 'Space') jump();
     };
-
     const handleTouch = () => jump();
 
     window.addEventListener('keydown', handleKeyDown);
@@ -47,28 +60,31 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // desenha personagem (elefante PHP)
+      // Personagem (PHP)
       if (img.complete) {
         ctx.save();
-        ctx.translate(x + phpWidth, y); // move a origem pro centro
-        ctx.scale(-1, 1); // inverte horizontalmente
+        ctx.translate(x + phpWidth, y);
+        ctx.scale(-1, 1);
         ctx.drawImage(img, 0, 0, img.width, img.height, -phpWidth, 0, phpWidth, phpHeight);
         ctx.restore();
       }
 
-      // obstáculos
+      // Obstáculos
       ctx.fillStyle = 'red';
       obstacles.forEach((obs) => {
         ctx.fillRect(obs.x, groundY - obs.height, obs.width, obs.height);
       });
 
-      // pontuação
+      // Pontuação
       ctx.fillStyle = 'white';
       ctx.font = '20px monospace';
       ctx.fillText(`Pulos certos: ${score}`, 20, 40);
     };
 
     const update = () => {
+      if (gameOver) return;
+
+      // Pulo
       if (isJumping) {
         velocity -= gravity;
         y -= velocity;
@@ -79,38 +95,36 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
         }
       }
 
-      // move obstáculos
+      // Obstáculos
       obstacles.forEach((obs) => {
         obs.x -= 5;
 
-        // colisão
-        const collided =
+        // Colisão
+        const hit =
           x + phpWidth > obs.x &&
           x < obs.x + obs.width &&
           y + phpHeight > groundY - obs.height;
 
-        if (collided) {
-          score = 0;
-          obstacles = [];
-          return;
+        if (hit) {
+          setGameOver(true);
         }
 
-        // passou com sucesso
+        // Pulou com sucesso
         if (!obs.passed && obs.x + obs.width < x) {
-          score++;
           obs.passed = true;
+          setScore((prev) => prev + 1);
         }
       });
 
-      // remove obstáculos fora da tela
+      // Limpa fora da tela
       obstacles = obstacles.filter((obs) => obs.x + obs.width > 0);
 
-      // adiciona novos obstáculos com maior espaçamento
-      if (Math.random() < 0.015) {
-        const width = 40 + Math.random() * 30;
+      // Novo obstáculo
+      if (Math.random() < 0.02) {
+        const width = 40 + Math.random() * 20;
         const height = 40 + Math.random() * 30;
         const lastX = obstacles.length > 0 ? obstacles[obstacles.length - 1].x : 0;
-        if (canvas.width - lastX > 300) {
+        if (canvas.width - lastX > 250) {
           obstacles.push({ x: canvas.width + 100, width, height });
         }
       }
@@ -120,6 +134,7 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
     };
 
     img.onload = () => {
+      y = groundY - phpHeight;
       update();
     };
 
@@ -128,16 +143,30 @@ export const PhpRunnerGame: React.FC<PhpRunnerGameProps> = ({ onClose }) => {
       window.removeEventListener('touchstart', handleTouch);
       window.removeEventListener('mousedown', handleTouch);
     };
-  }, []);
+  }, [gameOver]);
 
   return (
     <div className="relative w-full h-full">
+      {gameOver && (
+        <div className="absolute inset-0 bg-black bg-opacity-70 z-20 flex flex-col items-center justify-center space-y-4">
+          <p className="text-white text-2xl">Game Over!</p>
+          <p className="text-white text-lg">Pontuação: {score}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+          >
+            Jogar Novamente
+          </button>
+        </div>
+      )}
+
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+        className="absolute top-4 right-4 z-30 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
       >
         Fechar
       </button>
+
       <canvas
         ref={canvasRef}
         width={window.innerWidth}
