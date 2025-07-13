@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ParticleBackground } from './components/ParticleBackground';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
@@ -6,10 +6,19 @@ import { AboutSection } from './components/AboutSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ContactSection } from './components/ContactSection';
+import { PhpRunnerGame } from './components/PhpRunnerGame';
 
 function App() {
+  const [showGame, setShowGame] = useState(false);
+
   return (
     <div className="relative min-h-screen bg-gray-900 overflow-x-hidden">
+      {/* <button
+        onClick={() => setShowGame(true)}
+        className="fixed top-4 right-4 z-50 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+      >
+        Jogar 🐘
+      </button> */}
       <ParticleBackground />
       <Navigation />
       
@@ -29,10 +38,21 @@ function App() {
               © 2025 Ismael Lima. Todos os direitos reservados.
             </div>
             <div className="text-gray-400 text-sm">
+              <a
+                onClick={() => setShowGame(true)}
+                className="cursor-pointer mt-4 inline-block text-blue-400 hover:text-blue-300 text-xs"
+              >
+                Aqui tem uma surpresinha 🐘
+              </a>
             </div>
           </div>
         </div>
       </footer>
+      {showGame && (
+        <div className="fixed inset-0 z-50 bg-black">
+          <PhpRunnerGame onClose={() => setShowGame(false)} />
+        </div>
+      )}
     </div>
   );
 }
